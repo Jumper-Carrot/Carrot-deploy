@@ -28,6 +28,6 @@ done
 echo "✅ Installation completed. Existing files have been replaced if present."
 echo -e "\nNext steps:"
 echo "1. Rename .env.sample to .env and configure it:"
-echo "   mv .env.sample .env"
+echo "   cp .env.sample .env"
 echo "2. Run the application with Docker Compose:"
 echo "   docker compose up -d"
