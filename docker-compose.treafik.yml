@@ -1,0 +1,75 @@
+services:
+  carrot:
+    image: antoinelibert/carrot:${CARROT_IMAGE_VERSION:-latest}
+    restart: always
+    networks:
+      - traefik
+      - carrot
+    env_file:
+      - .env
+    # ports:
+    #   - ${CARROT_PORT:-9890}:${CARROT_PORT:-9890}
+    volumes:
+      - carrot_keys:/etc/keys
+    depends_on:
+      - traefik
+      - carrot-postgres
+    labels:
+      traefik.enable: true
+      traefik.http.routers.carrot.rule: Host(`${CARROT_DOMAIN}`)
+      traefik.http.routers.carrot.entrypoints: websecure
+      traefik.http.routers.carrot.tls: true
+      traefik.http.routers.carrot.tls.certresolver: letsencrypt
+      traefik.http.services.carrot.loadbalancer.server.port: "${CARROT_PORT:-9890}"
+      traefik.docker.network: traefik
+
+  carrot-postgres:
+    image: postgres:${POSTGRES_IMAGE_VERSION:-15}
+    container_name: carrot-postgres
+    restart: always
+    networks:
+      - carrot
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-carrot-db}
+      - POSTGRES_USER=${POSTGRES_USER:-carrot}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  traefik:
+    image: traefik:${TRAEFIK_IMAGE_VERSION:-latest}
+    container_name: carrot-traefik
+    restart: always
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik_letsencrypt:/letsencrypt
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL:-contact@compagny.com}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+
+volumes:
+  carrot_keys:
+  pg_data:
+  traefik_letsencrypt:
+
+networks:
+  carrot:
+  traefik:

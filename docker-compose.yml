@@ -1,0 +1,32 @@
+services:
+  carrot:
+    image: antoinelibert/carrot:${CARROT_IMAGE_VERSION:-latest}
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${CARROT_PORT:-9890}:${CARROT_PORT:-9890}
+    volumes:
+      - carrot_keys:/etc/keys
+    depends_on:
+      - carrot-postgres
+
+  carrot-postgres:
+    image: postgres:${POSTGRES_IMAGE_VERSION:-15}
+    container_name: carrot-postgres
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-carrot-db}
+      - POSTGRES_USER=${POSTGRES_USER:-carrot}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+volumes:
+  carrot_keys:
+  pg_data:
