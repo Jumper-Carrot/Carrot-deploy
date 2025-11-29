@@ -75,7 +75,7 @@ docker compose up -d
 > docker compose -f docker-compose.traefik.yml up -d
 > ```
 
-5. Access the Carrot application at `http://<your-server-ip>:9890/v1` (or `https://<your-domain>/v1`
+5. Access the Carrot application at `http://<your-server-ip>:9890` (or `https://<your-domain>`
    if using Traefik).
 
 ### Connect with your Jumper app
