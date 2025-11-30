@@ -1,6 +1,7 @@
 services:
   carrot:
     image: antoinelibert/carrot:${CARROT_IMAGE_VERSION:-latest}
+    container_name: carrot
     restart: always
     env_file:
       - .env
