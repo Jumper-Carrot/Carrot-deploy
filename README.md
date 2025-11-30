@@ -89,6 +89,10 @@ docker compose up -d
 3. Launch the Jumper application, and on the login page, enter the URL of your Carrot instance.
    For example: `http://<your-server-ip>:9890` or `https://<your-domain>` if using Traefik.
 
+>[!TIP]
+> You can set this URL as the `JUMPER_BACKEND_URL` environment variable on users’ machines 
+> to automate this step.
+
 4. Log in with the default administrator credentials:
 
    * Username: `admin@mail.com`
