@@ -19,12 +19,3 @@ Please include as much information as possible, including:
 We commit to acknowledging your report within **72 hours** and will provide 
 an estimated timeline for mitigation after the initial assessment. 
 We follow the principle of responsible disclosure.
-
-## 🔨 Supported Versions
-
-Only versions currently being actively supported will receive security updates.
-
-| Version | Supported? |
-| :--- | :--- |
-| **0.4.x (Current)** | ✅ Yes |
-| **0.3.x and below** | ❌ No |
