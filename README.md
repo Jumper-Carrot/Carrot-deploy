@@ -45,7 +45,7 @@ docker compose up -d
     curl -fsSL https://raw.githubusercontent.com/Jumper-Carrot/Carrot-deploy/main/install.sh | bash
     ```
 
-    > [!NOTE]
+    > **NOTE :**
     > _Or on Windows server with PowerShell_
     >
     > ```powershell
@@ -60,7 +60,7 @@ docker compose up -d
     cp .env.sample .env
     ```
 
-    > [!NOTE]
+    > **NOTE :**
     > _Or on Windows server with PowerShell_
     >
     > ```powershell
@@ -69,7 +69,7 @@ docker compose up -d
 
 3.  **(Optional) Edit the `.env` file to set your desired configuration.**
 
-    > [!IMPORTANT]
+    > **IMPORTANT :**
     > If you are in a production environment, make sure to set proper values for the following variables:
     >
     >   * `SECRET_KEY`: Secret key for the application.
@@ -83,7 +83,7 @@ docker compose up -d
     docker compose up -d
     ```
 
-    > [!TIP]
+    > **TIP :**
     > (Optional) If you want to use Traefik as a reverse proxy, you can set the `CARROT_DOMAIN` and
     > `LETSENCRYPT_EMAIL` variables and start the services with *docker-compose.traefik.yml* instead:
     >
@@ -105,7 +105,7 @@ docker compose up -d
 3.  **Launch the Jumper application, and on the login page, enter the URL of your Carrot instance.**
     For example: `http://<your-server-ip>:9890` or `https://<your-domain>` if using Traefik.
 
-    > [!TIP]
+    > **TIP :**
     > You can set this URL as the `JUMPER_BACKEND_URL` environment variable on users’ machines
     > to automate this step.
 
