@@ -12,6 +12,7 @@ services:
     #   - ${CARROT_PORT:-9890}:${CARROT_PORT:-9890}
     volumes:
       - carrot_keys:/etc/keys
+      - carrot_files:/app/files
     depends_on:
       - traefik
       - carrot-postgres
@@ -68,6 +69,7 @@ services:
 
 volumes:
   carrot_keys:
+  carrot_files:
   pg_data:
   traefik_letsencrypt:
 
