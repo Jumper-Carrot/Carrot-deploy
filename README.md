@@ -4,7 +4,7 @@
 
 This repository contains the Docker Compose configuration files to easily deploy an instance of the [Carrot](https://github.com/Jumper-Carrot/Carrot) server application, which is required to use the [Jumper](https://github.com/Jumper-Carrot/Jumper) application.
 
-For more information about Carrot and Jumper, please refer to the [Jumper documentation](https://carrot.jumper-app.com/).
+For more information about Carrot and Jumper, please refer to the [Jumper documentation](https://jumper-app.com/).
 
 ## 🚀 Getting Started
 
